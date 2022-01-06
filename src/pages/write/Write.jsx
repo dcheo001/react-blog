@@ -1,7 +1,9 @@
 import "./write.css"
 import { useState } from "react"
+import { useHistory } from "react-router-dom"
 
 export default function Write({author}) {
+    let history = useHistory()
     const [bodyText, setBodyText] = useState('')
     const [title, setTitle] = useState('')
     function handleSubmission(e) {
@@ -19,6 +21,7 @@ export default function Write({author}) {
         })
           .then((r) => r.json())
           .then((postSubmission) => console.log(postSubmission));
+          history.push("/");
     }
     return (
         <div className="write">
