@@ -2,7 +2,7 @@ import "./topbar.css"
 import { Link } from "react-router-dom";
 
 export default function Topbar() {
-    const user = false;
+    const user = true;
     return (
         <div className="top">
             <div className="topLeft">
@@ -40,8 +40,10 @@ export default function Topbar() {
                     </ul>
                 )
             }
-                
-                <i className="topSearchIcon fas fa-search"></i>
+                    <Link className="link" to="/settings">
+                        <i className="topSearchIcon fas fa-search"></i>
+                    </Link>
+               
             </div>
         </div>
     )
