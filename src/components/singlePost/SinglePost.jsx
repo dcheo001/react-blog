@@ -1,6 +1,7 @@
 import "./singlePost.css"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
+import moment from "moment"
 
 export default function SinglePost() {
     const [postState, setPostState] = useState({title: '', content: '', author_id: '', author: {id: '', author_name: ''}})
@@ -32,7 +33,8 @@ export default function SinglePost() {
                     <span className="singlePostAuthor">
                         Author: <b>{postState.author.author_name}</b>
                     </span>
-                    <span className="singlePostDate">1 hour ago</span>
+                    <span className="singlePostDate">{moment(postState.date).format('MMMM DD YYYY,  LT')}
+</span>
                 </div>
             <p className="singlePostDesc">
                 {postState.content} </p>
