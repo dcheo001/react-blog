@@ -11,7 +11,7 @@ export default function Posts({author, setAuthor}) {
       const [postData, setPostData] = useState([])
     return (
         <div className="posts">
-           {postData.map((post)=>{return <Post info={post}/>})}
+           {postData.map((post)=>{return <Post key={post.id} info={post}/>})}
         </div>
     )
 }

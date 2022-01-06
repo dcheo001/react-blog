@@ -1,17 +1,21 @@
 import "./singlePost.css"
 import { useEffect, useState } from "react"
+import { useParams } from "react-router-dom"
 
 export default function SinglePost() {
     const [postState, setPostState] = useState({title: '', content: '', author_id: '', author: {id: '', author_name: ''}})
+    const targetId = useParams()
     useEffect(()=> {
-        fetch('http://localhost:9292/posts/1')
+        fetch(`http://localhost:9292/posts/${targetId.postId}`)
         .then((response)=> response.json())
         .then((data)=> setPostState(data))
       },[])
 
 
     return (
+        
         <div className="singlePost">
+            <button onClick={(e=>console.log(targetId))}>Check </button>
             <div className="singlePostWrapper">
                 <img 
                 src="https://images.pexels.com/photos/6685428/pexels-photo-6685428.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" 

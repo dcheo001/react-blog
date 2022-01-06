@@ -18,7 +18,7 @@ export default function Write({author}) {
           }),
         })
           .then((r) => r.json())
-          .then((postSubmission) => console.log(postSubmission))
+          .then((postSubmission) => console.log(postSubmission));
     }
     return (
         <div className="write">
