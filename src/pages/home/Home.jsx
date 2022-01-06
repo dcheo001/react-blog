@@ -3,12 +3,12 @@ import Posts from "../../components/posts/Posts";
 import Sidebar from "../../components/sidebar/Sidebar";
 import "./home.css"
 
-export default function Home() {
+export default function Home({author}) {
     return (
     <>
         <Header />
         <div className="home">
-            <Posts />
+            <Posts author={author}/>
             <Sidebar />
         </div>
     </>
