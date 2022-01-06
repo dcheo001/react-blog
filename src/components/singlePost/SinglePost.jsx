@@ -2,8 +2,10 @@ import "./singlePost.css"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import moment from "moment"
+import { useHistory } from "react-router-dom"
 
 export default function SinglePost() {
+    let history = useHistory()
     const [postState, setPostState] = useState({title: '', content: '', author_id: '', author: {id: '', author_name: ''}})
     const targetId = useParams()
     useEffect(()=> {
@@ -11,6 +13,15 @@ export default function SinglePost() {
         .then((response)=> response.json())
         .then((data)=> setPostState(data))
       },[])
+
+    function handleDelete () { 
+        fetch(`http://localhost:9292/posts/${targetId.postId}`, {
+            method: "DELETE",
+        })
+        .then((r) => r.json())
+        .then((deletedPost) => console.log(deletedPost))
+        history.push("/")
+    }
 
 
     return (
@@ -26,7 +37,7 @@ export default function SinglePost() {
                     {postState.title}
                 <div className="singlePostEdit">
                     <i className="singlePostIcon far fa-edit"></i>
-                    <i className="singlePostIcon far fa-trash-alt"></i>
+                    <i className="singlePostIcon far fa-trash-alt" onClick={handleDelete}></i>
                 </div>
                 </h1>
                 <div className="singlePostInfo">

@@ -1,5 +1,6 @@
 import "./post.css"
 import { Link } from "react-router-dom";
+import moment from "moment";
 
 export default function Post({info}) {
     return (
@@ -19,7 +20,7 @@ export default function Post({info}) {
                 </Link>
                 
                 <hr/>
-                <span className="postDate">1 hour ago</span>
+                <span className="postDate">{moment(info.date).format('MMMM DD YYYY,  LT')}</span>
             </div>
             <p className="postDesc">
                 {info.content}
