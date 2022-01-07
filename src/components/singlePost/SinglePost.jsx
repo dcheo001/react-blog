@@ -17,10 +17,16 @@ export default function SinglePost() {
     const [desc, setDesc] = useState(postState.content);
     const [title, setTitle] = useState(postState.title)
 
+    function handleData (data) {
+        setDesc(data.content)
+        setTitle(data.title)
+        setPostState(data)
+    }
+
     useEffect(()=> {
         fetch(`http://localhost:9292/posts/${targetId.postId}`)
         .then((response)=> response.json())
-        .then((data)=> setPostState(data))
+        .then((data)=> handleData(data))
       },[])
 
     function handleDelete () { 
