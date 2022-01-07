@@ -11,11 +11,10 @@ export default function Post({info}) {
                 alt=""
             />
             <div className="postInfo">
-                <div className="postCats">
-                </div>
+                <div className="postCats"></div>
                 <Link className="link" to={`/post/${info.id}`}>
                     <span className="postTitle">
-                            {info.title}
+                        {info.title}
                     </span>
                 </Link>
                 
