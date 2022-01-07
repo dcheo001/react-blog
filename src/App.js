@@ -14,7 +14,7 @@ function App() {
     <Router>
       <TopBar user={user} setUser={setUser}/>
       <Switch>
-        <Route exact path="/">{user ? <Home setAuthor={setAuthor} author={author}/> : <Login author={author} setAuthor={setAuthor} user={user} setUser={setUser}/>}</Route>
+        <Route path="/">{user ? <Home setAuthor={setAuthor} author={author}/> : <Login author={author} setAuthor={setAuthor} user={user} setUser={setUser}/>}</Route>
         <Route path="/register">{user ? <Home setAuthor={setAuthor} author={author}/> : <Login author={author} setAuthor={setAuthor} user={user} setUser={setUser}/>}</Route>
         <Route path="/login">{user ? <Home  setAuthor={setAuthor} author={author}/> : <Login author={author} setAuthor={setAuthor} user={user} setUser={setUser} />}</Route>
         <Route path="/write">{user ? <Write author={author}/> : <Login author={author} setAuthor={setAuthor} user={user} setUser={setUser}/>}</Route>
