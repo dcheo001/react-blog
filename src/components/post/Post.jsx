@@ -1,7 +1,8 @@
 import "./post.css"
 import { Link } from "react-router-dom";
+import moment from "moment";
 
-export default function Post() {
+export default function Post({info}) {
     return (
         <div className="post">
             <img 
@@ -11,20 +12,18 @@ export default function Post() {
             />
             <div className="postInfo">
                 <div className="postCats">
-                    <span className="postCat">Music</span>
-                    <span className="postCat">Life</span>
                 </div>
-                <Link className="link" to="/post/:postId">
+                <Link className="link" to={`/post/${info.id}`}>
                     <span className="postTitle">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                            {info.title}
                     </span>
                 </Link>
                 
                 <hr/>
-                <span className="postDate">1 hour ago</span>
+                <span className="postDate">{moment(info.date).format('MMMM DD YYYY,  LT')}</span>
             </div>
             <p className="postDesc">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Veritatis ea rerum consequuntur, est iure praesentium corporis odio vel cumque adipisci totam. Rem necessitatibus architecto expedita voluptates, ipsum omnis asperiores enim. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Veritatis ea rerum consequuntur, est iure praesentium corporis odio vel cumque adipisci totam. Rem necessitatibus architecto expedita voluptates, ipsum omnis asperiores enim. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Veritatis ea rerum consequuntur, est iure praesentium corporis odio vel cumque adipisci totam. Rem necessitatibus architecto expedita voluptates, ipsum omnis asperiores enim.
+                {info.content}
             </p> 
         </div>
     )

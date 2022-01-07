@@ -1,7 +1,31 @@
 import "./singlePost.css"
+import { useEffect, useState } from "react"
+import { useParams } from "react-router-dom"
+import moment from "moment"
+import { useHistory } from "react-router-dom"
 
 export default function SinglePost() {
+    let history = useHistory()
+    const [postState, setPostState] = useState({title: '', content: '', author_id: '', author: {id: '', author_name: ''}})
+    const targetId = useParams()
+    useEffect(()=> {
+        fetch(`http://localhost:9292/posts/${targetId.postId}`)
+        .then((response)=> response.json())
+        .then((data)=> setPostState(data))
+      },[])
+
+    function handleDelete () { 
+        fetch(`http://localhost:9292/posts/${targetId.postId}`, {
+            method: "DELETE",
+        })
+        .then((r) => r.json())
+        .then((deletedPost) => console.log(deletedPost))
+        history.push("/")
+    }
+
+
     return (
+        
         <div className="singlePost">
             <div className="singlePostWrapper">
                 <img 
@@ -10,20 +34,21 @@ export default function SinglePost() {
                 className="singlePostImg" 
                 />
                 <h1 className="singlePostTitle">
-                    Lorem ipsum dolor sit
+                    {postState.title}
                 <div className="singlePostEdit">
                     <i className="singlePostIcon far fa-edit"></i>
-                    <i className="singlePostIcon far fa-trash-alt"></i>
+                    <i className="singlePostIcon far fa-trash-alt" onClick={handleDelete}></i>
                 </div>
                 </h1>
                 <div className="singlePostInfo">
                     <span className="singlePostAuthor">
-                        Author: <b>Author Name</b>
+                        Author: <b>{postState.author.author_name}</b>
                     </span>
-                    <span className="singlePostDate">1 hour ago</span>
+                    <span className="singlePostDate">{moment(postState.date).format('MMMM DD YYYY,  LT')}
+</span>
                 </div>
             <p className="singlePostDesc">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laudantium vero rerum, quos quam exercitationem accusantium nobis quibusdam voluptatum consectetur veniam accusamus, impedit magni nemo officia optio aperiam soluta. Adipisci, doloremque? Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati, magnam recusandae consequatur distinctio ex expedita illum corporis excepturi placeat voluptatibus fugit soluta unde dolorum itaque maxime. Quo odit alias aliquid.</p>
+                {postState.content} </p>
             </div>
         </div>
     )
