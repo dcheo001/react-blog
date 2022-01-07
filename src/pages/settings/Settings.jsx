@@ -23,7 +23,7 @@ export default function Settings() {
                     <label>Username</label>
                     <input type="text" placeholder="User Name" />
                     <label>Email</label>
-                    <input type="email" placeholder="abc@efghi.com" />
+                    <input type="email" placeholder="abcd@efghi.com" />
                     <label>Password</label>
                     <input type="password" placeholder="*******"/>
                     <button className="settingsSubmit">Update</button>
