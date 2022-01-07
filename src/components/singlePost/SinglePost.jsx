@@ -10,12 +10,12 @@ export default function SinglePost() {
         title: '', 
         content: '', 
         author_id: '', 
-        author: {id: '', 
-        author_name: ''
-        }}
+        author: {id: '', author_name: ''}}
     )
     const targetId = useParams()
     const [updateMode, setUpdateMode] = useState(false)
+    const [desc, setDesc] = useState(postState.content);
+    const [title, setTitle] = useState(postState.title)
 
     useEffect(()=> {
         fetch(`http://localhost:9292/posts/${targetId.postId}`)
@@ -32,23 +32,24 @@ export default function SinglePost() {
         history.push("/")
     }
 
-    // function handlePatch(event) {
-    //     event.preventDefault()
-    //     const options = {
-    //         method: "PATCH",
-    //         headers: {
-    //           'Content-Type': 'application/json'
-    //         },
-    //         body: JSON.stringify({
-    //           id: targetId.id,
-    //           title: postState.title,
-    //           body: postState.body
-    //         })
-    //       }
-    //       fetch(`http://localhost:9292/posts/${targetId.postId}`, options)
-    //         .then(resp => resp.json())
-    //         .then(updatedPost => {console.log(updatedPost)})
-    // }
+    function handlePatch(event) {
+        event.preventDefault()
+        const options = {
+            method: "PATCH",
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              id: targetId.id,
+              title: title,
+              content: desc
+            })
+          }
+          fetch(`http://localhost:9292/posts/${targetId.postId}`, options)
+            .then(resp => resp.json())
+            .then(updatedPost => {setPostState(updatedPost)})
+            setUpdateMode(false)
+    }
 
 
     return (
@@ -60,12 +61,15 @@ export default function SinglePost() {
                     alt="" 
                     className="singlePostImg" 
                     />{updateMode ? 
-                        <input 
-                        type="text" 
-                        value={postState.title} 
-                        className="singlePostTitleInput" 
-                        autoFocus/> 
+                        <textarea 
+                            type="text"
+                            className="singlePostTitleInput" 
+                            autoFocus 
+                            onChange={(e) => setTitle(e.target.value)}
+                            value={title}
+                >
                         
+                        </textarea>
                         : ( 
                         
                         <h1 className="singlePostTitle">
@@ -86,7 +90,10 @@ export default function SinglePost() {
                         {moment(postState.date).format('MMMM DD YYYY,  LT')}
                     </span>
                 </div>
-                {updateMode ? <textarea className="singlePostDescInput"/> : 
+                {updateMode ?<div> <textarea className="singlePostDescInput" value={desc}
+                onChange={(e) => setDesc(e.target.value) }> </textarea><button onClick={handlePatch}>Submit</button></div> 
+                
+                : 
                     <p className="singlePostDesc">
                     {postState.content} 
                     </p>
