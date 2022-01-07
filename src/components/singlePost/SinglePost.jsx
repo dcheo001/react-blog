@@ -91,7 +91,7 @@ export default function SinglePost() {
                     </span>
                 </div>
                 {updateMode ?<div> <textarea className="singlePostDescInput" value={desc}
-                onChange={(e) => setDesc(e.target.value) }> </textarea><button onClick={handlePatch}>Submit</button></div> 
+                onChange={(e) => setDesc(e.target.value) }> </textarea><button className="singlePostButton" onClick={handlePatch}>Submit</button></div> 
                 
                 : 
                     <p className="singlePostDesc">
