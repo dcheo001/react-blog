@@ -9,10 +9,10 @@ import { useState } from "react";
 
 function App() {
   const [user, setUser] = useState(false)
-  const [author, setAuthor] = useState({author_name: '', author_id: ''})
+  const [author, setAuthor] = useState({author_name: '', author_id: 0})
   return (
     <Router>
-      <TopBar user={user} setUser={setUser}/>
+      <TopBar user={user} setUser={setUser} setAuthor={setAuthor}/>
       <Switch>
         <Route exact path="/">{user ? <Home setAuthor={setAuthor} author={author}/> : <Login author={author} setAuthor={setAuthor} user={user} setUser={setUser}/>}</Route>
         <Route path="/register">{user ? <Home setAuthor={setAuthor} author={author}/> : <Login author={author} setAuthor={setAuthor} user={user} setUser={setUser}/>}</Route>

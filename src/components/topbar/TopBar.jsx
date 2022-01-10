@@ -1,7 +1,11 @@
 import "./topbar.css"
 import { Link } from "react-router-dom";
 
-export default function Topbar({user, setUser}) {
+export default function Topbar({user, setUser, setAuthor}) {
+    function logout (event) {
+        setUser(false)
+        setAuthor({author_name: '', author_id: ''})
+    }
     return (
         <div className="top">
             <div className="topLeft">
@@ -16,7 +20,7 @@ export default function Topbar({user, setUser}) {
                     <li className="topListItem"><Link className="link" to="/">ABOUT</Link></li>
                     <li className="topListItem"><Link className="link" to="/">CONTACT</Link></li>
                     <li className="topListItem"><Link className="link" to="/write">WRITE</Link></li>
-                    <li className="topListItem">
+                    <li className="topListItem" onClick={(e)=>logout(e)}>
                         {user && "LOGOUT"}
                     </li>
                 </ul>

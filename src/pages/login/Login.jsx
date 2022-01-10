@@ -5,6 +5,9 @@ import { useState } from "react";
 export default function Login({author, setAuthor, user, setUser}) {
     const [emailForm, setEmailForm] = useState('Enter your Email...')
     const [nameForm, setNameForm] = useState('Enter your Name...')
+    function loggin () {
+      setUser(true)
+    }
     function loginAttempt(e) {
         e.preventDefault();
         fetch("http://localhost:9292/authors", {
@@ -18,8 +21,8 @@ export default function Login({author, setAuthor, user, setUser}) {
           }),
         })
           .then((r) => r.json())
-          .then((loggedInUser) => setAuthor(loggedInUser))
-          .then(setUser(true))
+          .then((loggedInUser) => setAuthor(loggedInUser)); 
+          loggin()
       }
     return (
         <div className="login">
